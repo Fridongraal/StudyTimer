@@ -1,14 +1,23 @@
-# Base de datos
-backend/sessions.db
-
 # Python
 __pycache__/
 *.py[cod]
 *.pyo
-.env
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Base de datos (datos locales, no van al repo)
+backend/sessions.db
+
+# Entorno virtual
 venv/
 env/
+.env
+
+# VSCode
+.vscode/
 
 # Sistema
-.DS_Store
-Thumbs.db
+.DS
