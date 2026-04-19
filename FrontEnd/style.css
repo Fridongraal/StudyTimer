@@ -1,0 +1,531 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: #fdf6f0;
+  background-image:
+    radial-gradient(circle at 20% 20%, #fde8d8 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, #e8d8f5 0%, transparent 40%),
+    radial-gradient(circle at 60% 10%, #d8eef5 0%, transparent 30%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 32px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 32px rgba(180, 140, 200, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Título */
+.app-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #b07cc6;
+  letter-spacing: -0.5px;
+}
+
+.app-title::before {
+  content: '🐾 ';
+}
+
+.app-title::after {
+  content: ' 🐶';
+}
+
+/* Badge de fase */
+.phase-badge {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  background: #f0e6fa;
+  color: #b07cc6;
+}
+
+.phase-badge.studying {
+  background: #d8f0e8;
+  color: #5aaa80;
+}
+
+.phase-badge.resting {
+  background: #fde8d8;
+  color: #e0855a;
+}
+
+/* Timer display */
+.timer-display {
+  font-size: 80px;
+  font-weight: 800;
+  color: #5c4a7a;
+  letter-spacing: -2px;
+  line-height: 1;
+  transition: color 0.4s ease;
+  position: relative;
+}
+
+.timer-display::after {
+  content: '🐾';
+  position: absolute;
+  font-size: 20px;
+  bottom: 4px;
+  right: -28px;
+  animation: pawBounce 2s ease-in-out infinite;
+}
+
+@keyframes pawBounce {
+  0%, 100% { transform: translateY(0) rotate(-10deg); }
+  50%       { transform: translateY(-6px) rotate(10deg); }
+}
+
+.timer-display.studying { color: #5aaa80; }
+.timer-display.resting  { color: #e0855a; }
+
+/* Controles */
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  border-radius: 16px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0px);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #c9a0dc;
+  color: white;
+}
+
+.btn-secondary {
+  background: #a8d8c8;
+  color: #3d7a68;
+}
+
+.btn-ghost {
+  background: #f5eefc;
+  color: #b07cc6;
+}
+
+/* Secciones */
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #c4a8d8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Presets */
+.presets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.preset-btn {
+  font-family: 'Nunito', sans-serif;
+  background: #fdf0ff;
+  border: 2px solid #e8d0f5;
+  border-radius: 16px;
+  padding: 12px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.preset-btn:hover {
+  background: #f0deff;
+  border-color: #c9a0dc;
+  transform: translateY(-2px);
+}
+
+.preset-btn.active {
+  background: #c9a0dc;
+  border-color: #b07cc6;
+}
+
+.preset-btn.active .preset-name { color: white; }
+.preset-btn.active .preset-times { color: rgba(255,255,255,0.8); }
+
+.preset-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #7a5c9a;
+}
+
+.preset-times {
+  font-size: 12px;
+  font-weight: 600;
+  color: #b09ac0;
+}
+
+.preset-emoji {
+  font-size: 20px;
+}
+
+/* Inputs personalizados */
+.custom-inputs {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.input-group label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #b09ac0;
+}
+
+.input-group input {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #5c4a7a;
+  background: #fdf0ff;
+  border: 2px solid #e8d0f5;
+  border-radius: 12px;
+  padding: 10px 12px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #c9a0dc;
+}
+
+/* Contador de sesiones */
+.session-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fdf0ff;
+  border: 2px solid #e8d0f5;
+  border-radius: 999px;
+  padding: 8px 20px;
+}
+
+.session-emoji {
+  font-size: 16px;
+}
+
+.session-count {
+  font-size: 22px;
+  font-weight: 800;
+  color: #b07cc6;
+}
+
+.session-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #c4a8d8;
+}
+
+/* Botón tema */
+.btn-theme {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #f5eefc;
+  border: 2px solid #e8d0f5;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-theme:hover {
+  transform: rotate(20deg) scale(1.1);
+}
+
+/* Para que el botón se posicione bien */
+.container {
+  position: relative;
+}
+
+/* ── Modo oscuro ── */
+body.dark {
+  background-color: #1a1525;
+  background-image:
+    radial-gradient(circle at 20% 20%, #2a1a3a 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, #1a2a3a 0%, transparent 40%),
+    radial-gradient(circle at 60% 10%, #1a2535 0%, transparent 30%);
+}
+
+body.dark .container {
+  background: rgba(30, 22, 45, 0.9);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .app-title {
+  color: #d4a0f0;
+}
+
+body.dark .timer-display {
+  color: #c090e8;
+}
+
+body.dark .timer-display.studying { color: #80d4a8; }
+body.dark .timer-display.resting  { color: #f0a878; }
+
+body.dark .phase-badge {
+  background: #2e1e45;
+  color: #d4a0f0;
+}
+
+body.dark .phase-badge.studying {
+  background: #1a3528;
+  color: #80d4a8;
+}
+
+body.dark .phase-badge.resting {
+  background: #3a2010;
+  color: #f0a878;
+}
+
+body.dark .section-title {
+  color: #9070b0;
+}
+
+body.dark .preset-btn {
+  background: #2a1a3a;
+  border-color: #3d2858;
+}
+
+body.dark .preset-btn:hover {
+  background: #351e4a;
+  border-color: #c9a0dc;
+}
+
+body.dark .preset-btn.active {
+  background: #7a50a0;
+  border-color: #c9a0dc;
+}
+
+body.dark .preset-name {
+  color: #d4a0f0;
+}
+
+body.dark .preset-times {
+  color: #9070b0;
+}
+
+body.dark .input-group label {
+  color: #9070b0;
+}
+
+body.dark .input-group input {
+  background: #2a1a3a;
+  border-color: #3d2858;
+  color: #d4a0f0;
+}
+
+body.dark .input-group input:focus {
+  border-color: #c9a0dc;
+}
+
+body.dark .session-counter {
+  background: #2a1a3a;
+  border-color: #3d2858;
+}
+
+body.dark .session-count {
+  color: #d4a0f0;
+}
+
+body.dark .session-label {
+  color: #9070b0;
+}
+
+body.dark .btn-theme {
+  background: #2a1a3a;
+  border-color: #3d2858;
+}
+
+body.dark .btn-ghost {
+  background: #2a1a3a;
+  color: #d4a0f0;
+}
+
+/* ── Calendario ── */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.month-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #7a5c9a;
+  text-transform: capitalize;
+}
+
+.btn-month {
+  background: #f5eefc;
+  border: 2px solid #e8d0f5;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  cursor: pointer;
+  color: #b07cc6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.btn-month:hover {
+  background: #eddff8;
+  transform: scale(1.1);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  width: 100%;
+}
+
+.calendar-day-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #c4a8d8;
+  text-align: center;
+  padding: 2px 0 6px;
+  text-transform: uppercase;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: default;
+  transition: transform 0.15s ease;
+  position: relative;
+  gap: 1px;
+}
+
+.calendar-day:hover {
+  transform: scale(1.15);
+  z-index: 1;
+}
+
+.calendar-day.empty {
+  background: transparent;
+}
+
+.calendar-day.today {
+  outline: 2px solid #c9a0dc;
+  outline-offset: 1px;
+}
+
+.calendar-day .day-number {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.calendar-day .day-hours {
+  font-size: 9px;
+  font-weight: 600;
+  opacity: 0.8;
+  line-height: 1;
+}
+
+.calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  width: 100%;
+}
+
+.legend-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #c4a8d8;
+}
+
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+/* Modo oscuro - calendario */
+body.dark .month-label   { color: #d4a0f0; }
+body.dark .btn-month     { background: #2a1a3a; border-color: #3d2858; color: #d4a0f0; }
+body.dark .btn-month:hover { background: #351e4a; }
+body.dark .calendar-day-name { color: #9070b0; }
