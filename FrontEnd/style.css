@@ -21,17 +21,7 @@ body {
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border-radius: 32px;
-  padding: 40px 36px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 8px 32px rgba(180, 140, 200, 0.15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
+  display: none; /* ya no se usa */
 }
 
 /* Título */
@@ -529,3 +519,73 @@ body.dark .month-label   { color: #d4a0f0; }
 body.dark .btn-month     { background: #2a1a3a; border-color: #3d2858; color: #d4a0f0; }
 body.dark .btn-month:hover { background: #351e4a; }
 body.dark .calendar-day-name { color: #9070b0; }
+
+
+/* ── Layout dos columnas ── */
+.layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  width: 100%;
+  max-width: 960px;
+  align-items: start;
+}
+
+.column {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 32px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 8px 32px rgba(180, 140, 200, 0.15);
+}
+
+.column-right {
+  align-items: stretch;
+}
+
+/* Botón tema ahora fuera del container */
+.btn-theme {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.85);
+  border: 2px solid #e8d0f5;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.btn-theme:hover {
+  transform: rotate(20deg) scale(1.1);
+}
+
+/* Mobile — una columna */
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
+}
+
+/* Modo oscuro — columnas */
+body.dark .column {
+  background: rgba(30, 22, 45, 0.9);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .btn-theme {
+  background: rgba(30, 22, 45, 0.9);
+  border-color: #3d2858;
+}

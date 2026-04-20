@@ -8,78 +8,79 @@
 </head>
 <body>
 
-  <div class="container">
-    <!-- Toggle modo oscuro -->
-    <button class="btn-theme" id="btn-theme">🌙</button>
+  <button class="btn-theme" id="btn-theme">🌙</button>
 
-    <h1 class="app-title">Study Timer</h1>
+  <div class="layout">
 
-    <!-- Fase actual -->
-    <div class="phase-badge" id="phase-badge">Listo</div>
+    <!-- Columna izquierda -->
+    <div class="column column-left">
 
-    <!-- Contador de sesiones -->
-    <div class="session-counter">
-    <span class="session-emoji">🐾</span>
-    <span class="session-count" id="session-count">0</span>
-    <span class="session-label">sesiones hoy</span>
-    </div>
+      <h1 class="app-title">Study Timer</h1>
 
-    <!-- Display del timer -->
-    <div class="timer-display" id="timer-display">25:00</div>
+      <div class="phase-badge" id="phase-badge">Listo</div>
 
-    <!-- Controles principales -->
-    <div class="controls">
-      <button class="btn btn-primary" id="btn-start">Iniciar</button>
-      <button class="btn btn-secondary" id="btn-pause" disabled>Pausar</button>
-      <button class="btn btn-ghost" id="btn-reset">Reiniciar</button>
-    </div>
-
-    <!-- Presets -->
-    <div class="section">
-      <h2 class="section-title">Presets</h2>
-      <div class="presets" id="presets-container">
-        <!-- Se llenan desde JS -->
+      <div class="session-counter">
+        <span class="session-emoji">🐾</span>
+        <span class="session-count" id="session-count">0</span>
+        <span class="session-label">sesiones hoy</span>
       </div>
-    </div>
 
-    <!-- Configuración manual -->
-    <div class="section">
-      <h2 class="section-title">Personalizado</h2>
-      <div class="custom-inputs">
-        <div class="input-group">
-          <label for="input-study">Estudio (min)</label>
-          <input type="number" id="input-study" min="1" max="180" value="25" />
-        </div>
-        <div class="input-group">
-          <label for="input-rest">Descanso (min)</label>
-          <input type="number" id="input-rest" min="1" max="60" value="5" />
-        </div>
-        <button class="btn btn-secondary" id="btn-set">Aplicar</button>
+      <div class="timer-display" id="timer-display">25:00</div>
+
+      <div class="controls">
+        <button class="btn btn-primary" id="btn-start">Iniciar</button>
+        <button class="btn btn-secondary" id="btn-pause" disabled>Pausar</button>
+        <button class="btn btn-ghost" id="btn-reset">Reiniciar</button>
       </div>
+
+      <div class="section">
+        <h2 class="section-title">Presets</h2>
+        <div class="presets" id="presets-container"></div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Personalizado</h2>
+        <div class="custom-inputs">
+          <div class="input-group">
+            <label for="input-study">Estudio (min)</label>
+            <input type="number" id="input-study" min="1" max="180" value="25" />
+          </div>
+          <div class="input-group">
+            <label for="input-rest">Descanso (min)</label>
+            <input type="number" id="input-rest" min="1" max="60" value="5" />
+          </div>
+          <button class="btn btn-secondary" id="btn-set">Aplicar</button>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Calendario -->
-    <div class="section">
-    <h2 class="section-title">Este mes</h2>
-    <div class="calendar-header">
-        <button class="btn-month" id="btn-prev">‹</button>
-        <span class="month-label" id="month-label"></span>
-        <button class="btn-month" id="btn-next">›</button>
-    </div>
-    <div class="calendar-grid" id="calendar-grid"></div>
-    <div class="calendar-legend">
-        <span class="legend-label">Menos</span>
-        <span class="legend-dot" style="background:#f0e6fa"></span>
-        <span class="legend-dot" style="background:#d4a0f0"></span>
-        <span class="legend-dot" style="background:#b07cc6"></span>
-        <span class="legend-dot" style="background:#7a4a9a"></span>
-        <span class="legend-label">Más</span>
-    </div>
+    <!-- Columna derecha -->
+    <div class="column column-right">
+
+      <div class="section">
+        <h2 class="section-title">Este mes</h2>
+        <div class="calendar-header">
+          <button class="btn-month" id="btn-prev">‹</button>
+          <span class="month-label" id="month-label"></span>
+          <button class="btn-month" id="btn-next">›</button>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+        <div class="calendar-legend">
+          <span class="legend-label">Menos</span>
+          <span class="legend-dot" style="background:#f0e6fa"></span>
+          <span class="legend-dot" style="background:#d4a0f0"></span>
+          <span class="legend-dot" style="background:#b07cc6"></span>
+          <span class="legend-dot" style="background:#7a4a9a"></span>
+          <span class="legend-label">Más</span>
+        </div>
+      </div>
+
     </div>
 
   </div>
+
   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-    <script src="app.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
