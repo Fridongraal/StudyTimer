@@ -177,6 +177,7 @@ async function init() {
   await loadPresets();
   await poll();
   await renderCalendar();
+  renderTodos();
 }
 
 // ── Sonidos ───────────────────────────────────────────────
@@ -313,6 +314,84 @@ document.getElementById("btn-next").addEventListener("click", () => {
   renderCalendar();
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  init();
+// ── To-do list ───────────────────────────────────────────
+
+let todos = JSON.parse(localStorage.getItem("todos") || "[]");
+
+const todoInput     = document.getElementById("todo-input");
+const todoList      = document.getElementById("todo-list");
+const btnAddTodo    = document.getElementById("btn-add-todo");
+const todoRemaining = document.getElementById("todo-remaining");
+const btnClearDone  = document.getElementById("btn-clear-done");
+
+function saveTodos() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function renderTodos() {
+  todoList.innerHTML = "";
+
+  todos.forEach((todo, index) => {
+    const li = document.createElement("li");
+    li.className = `todo-item${todo.done ? " done" : ""}`;
+
+    const checkbox = document.createElement("div");
+    checkbox.className = `todo-checkbox${todo.done ? " checked" : ""}`;
+    checkbox.textContent = todo.done ? "✓" : "";
+    checkbox.addEventListener("click", () => toggleTodo(index));
+
+    const text = document.createElement("span");
+    text.className = "todo-text";
+    text.textContent = todo.text;
+
+    const del = document.createElement("button");
+    del.className = "todo-delete";
+    del.textContent = "✕";
+    del.addEventListener("click", () => deleteTodo(index));
+
+    li.appendChild(checkbox);
+    li.appendChild(text);
+    li.appendChild(del);
+    todoList.appendChild(li);
+  });
+
+  const pending = todos.filter(t => !t.done).length;
+  todoRemaining.textContent = pending === 0
+    ? todos.length === 0 ? "" : "🐾 Todo listo!"
+    : `${pending} tarea${pending !== 1 ? "s" : ""} pendiente${pending !== 1 ? "s" : ""}`;
+}
+
+function addTodo() {
+  const text = todoInput.value.trim();
+  if (!text) return;
+  todos.unshift({ text, done: false });
+  saveTodos();
+  renderTodos();
+  todoInput.value = "";
+  todoInput.focus();
+}
+
+function toggleTodo(index) {
+  todos[index].done = !todos[index].done;
+  saveTodos();
+  renderTodos();
+}
+
+function deleteTodo(index) {
+  todos.splice(index, 1);
+  saveTodos();
+  renderTodos();
+}
+
+btnAddTodo.addEventListener("click", addTodo);
+btnClearDone.addEventListener("click", () => {
+  todos = todos.filter(t => !t.done);
+  saveTodos();
+  renderTodos();
 });
+
+todoInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") addTodo();
+});
+
+document.addEventListener("DOMContentLoaded", init);
